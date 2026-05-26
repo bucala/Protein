@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="sk">
 <head>
 <meta charset="UTF-8">
@@ -323,7 +323,7 @@ select.srt{padding:6px 24px 6px 10px;border-radius:var(--rsm);border:1.5px solid
 ═══════════════════════════════════════ */
 const DB = [
   {
-    id:1, brand:"Vilgain", name:"Grass-Fed Whey Protein", fullName:"Vilgain Grass-Fed Whey Protein – 1000 g",
+    id:1, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-grass-fed-whey-protein-cokolada.jpg", brand:"Vilgain", name:"Grass-Fed Whey Protein", fullName:"Vilgain Grass-Fed Whey Protein – 1000 g",
     type:"WPC", origin:"CZ", price:31.9, weight:1000, protein:76,
     flavors:["Čokoláda","Vanilka","Jahoda","Natural","Karamel","Banán","Pistácia","Cookies"],
     rating:4.8, lactoseFree:false, vegan:false, wheyBased:true,
@@ -335,7 +335,7 @@ const DB = [
     desc:"Prémiový srvátkový koncentrát (WPC) z mlieka kráv pasúcich sa na pastvinách v UK. Ultrafiltrovaný pri nízkych teplotách, sladený iba stéviou. Minimalistické zloženie bez umelých sladidiel a farbív. Dostupný v 8+ príchutiach vrátane trendovej pistácie a slaného karamelu. Najlepšie hodnotený proteín na SK/CZ trhu – 98 % odporúčaní zákazníkov, 3 000+ recenzií."
   },
   {
-    id:2, brand:"Vilgain", name:"Grass-Fed Whey Protein Isolate", fullName:"Vilgain Grass-Fed Whey Protein Isolate – 1000 g",
+    id:2, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-grass-fed-whey-protein-isolate-cokolada.jpg", brand:"Vilgain", name:"Grass-Fed Whey Protein Isolate", fullName:"Vilgain Grass-Fed Whey Protein Isolate – 1000 g",
     type:"WPI", origin:"CZ", price:37.9, weight:1000, protein:83,
     flavors:["Čokoláda","Vanilka","Jahoda"],
     rating:4.7, lactoseFree:false, vegan:false, wheyBased:true,
@@ -347,7 +347,7 @@ const DB = [
     desc:"Prémiový srvátkový izolát z mlieka kráv pasúcich sa na írskych a britských pastvinách. 83 % bielkovín, minimum tuku a cukru. Sladený stéviou, bez sóje, vajec, orechov a lepku. Pre tých, ktorí hľadajú to najčistejšie. Skvelý pre ľudí sledujúcich každú kalóriu."
   },
   {
-    id:3, brand:"Vilgain", name:"Lactose Free Whey Protein", fullName:"Vilgain Lactose Free Whey Protein – 1000 g",
+    id:3, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-lactose-free-whey-protein-cokolada.jpg", brand:"Vilgain", name:"Lactose Free Whey Protein", fullName:"Vilgain Lactose Free Whey Protein – 1000 g",
     type:"WPC", origin:"CZ", price:29.99, weight:1000, protein:75,
     flavors:["Čokoládový šejk","Čučoriedka","Vanilka","Karamel"],
     rating:4.7, lactoseFree:true, vegan:false, wheyBased:true,
@@ -359,7 +359,7 @@ const DB = [
     desc:"Bezlaktózový srvátkový proteín pre ľudí s intoleranciou laktózy. Ultrafiltrovaný pri nízkych teplotách. 75 % bielkovín, prírodné sladenie stéviou. Bez umelých farbív a sladidiel. Vilgain Lactose Free je ideálny aj pre ľudí s citlivým trávením."
   },
   {
-    id:4, brand:"Vilgain", name:"Clear Whey Isolate", fullName:"Vilgain Clear Whey Isolate – 500 g",
+    id:4, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-clear-whey-isolate-jahoda-limonada.jpg", brand:"Vilgain", name:"Clear Whey Isolate", fullName:"Vilgain Clear Whey Isolate – 500 g",
     type:"WPI", origin:"CZ", price:29.9, weight:500, protein:84,
     flavors:["Jahoda Limonáda","Citrón","Pink grapefruit","Broskyňa"],
     rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
@@ -371,7 +371,7 @@ const DB = [
     desc:"Clear srvátkový izolát s konzistenciou ovocnej limonády. 98 % čistý WPI sladený prírodnými steviol-glykozidmi. Bez mliečnej štruktúry, ideálny vychladený ako letný drink. Bez cukru, bez tuku. Vilgain Clear Whey Isolate je trendový clear proteín s excelentnou chuťou."
   },
   {
-    id:5, brand:"Voxberg", name:"Whey Protein 100", fullName:"Voxberg Whey Protein 100 – 990 g",
+    id:5, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-whey-protein-100-cokolada.jpg", brand:"Voxberg", name:"Whey Protein 100", fullName:"Voxberg Whey Protein 100 – 990 g",
     type:"WPC", origin:"SK", price:33.92, weight:990, protein:77,
     flavors:["Čokoláda","Vanilka","Biela čokoláda & Malina","Biela čokoláda & Karamel","Cookies","Slaný karamel","Vanilka & Jahoda"],
     rating:4.2, lactoseFree:true, vegan:false, wheyBased:true,
@@ -383,7 +383,7 @@ const DB = [
     desc:"Slovenský srvátkový koncentrát vyrobený CFM metódou s pridaným L-leucínom (3 g/dávku) pre maximálnu proteosyntézu. Bez laktózy a lepku, najkvalitnejšie suroviny z EÚ. Voxberg je slovenský výrobca z Bratislavy so zameraním na čisté zloženie a výbornú chuť."
   },
   {
-    id:6, brand:"Voxberg", name:"Complex Protein", fullName:"Voxberg Complex Protein – 990 g",
+    id:6, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-complex-protein-cokolada.jpg", brand:"Voxberg", name:"Complex Protein", fullName:"Voxberg Complex Protein – 990 g",
     type:"Blend", origin:"SK", price:37.26, weight:990, protein:80,
     flavors:["Čokoláda","Vanilka","Karamel"],
     rating:4.0, lactoseFree:false, vegan:false, wheyBased:true,
@@ -395,7 +395,7 @@ const DB = [
     desc:"Viaczložkový proteín z troch zdrojov: srvátkový koncentrát (46 %), mliečny koncentrát (25 %) a vaječná bielkovina (23 %). Kombinácia rýchlych a pomalých bielkovín zabezpečuje dlhotrvajúci prísun aminokyselín. 24 g bielkovín na dávku, menej ako 0,5 g cukru."
   },
   {
-    id:7, brand:"Voxberg", name:"Women's Protein", fullName:"Voxberg Women's Protein – 990 g",
+    id:7, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-womens-protein-vanilka-malina.jpg", brand:"Voxberg", name:"Women's Protein", fullName:"Voxberg Women's Protein – 990 g",
     type:"WPC", origin:"SK", price:35.91, weight:990, protein:77,
     flavors:["Vanilka & Malina","Biela čokoláda & Karamel","Čokoláda"],
     rating:4.3, lactoseFree:false, vegan:false, wheyBased:true,
@@ -407,7 +407,7 @@ const DB = [
     desc:"Srvátkový proteín špeciálne formulovaný pre ženy. Doplnený o Garciniu kambodžskú, vitamín D, kyselinu listovú, zinok a železo – látky podporujúce metabolizmus a energetický systém. Lahodné príchute, kvalitný WPC základ."
   },
   {
-    id:8, brand:"Voxberg", name:"Vegan Protein", fullName:"Voxberg Vegan Protein – 480 g",
+    id:8, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-vegan-protein-cokolada.jpg", brand:"Voxberg", name:"Vegan Protein", fullName:"Voxberg Vegan Protein – 480 g",
     type:"Vegan", origin:"SK", price:20.79, weight:480, protein:72,
     flavors:["Čokoláda","Vanilka","Jahoda"],
     rating:4.2, lactoseFree:true, vegan:true, wheyBased:false,
@@ -419,7 +419,7 @@ const DB = [
     desc:"Slovenský vegánsky proteín z hrachového izolátu a izolátu z fazúľ. Doplnený o komplex vitamínov vrátane vitamínu B12, ktorého má telo na vegánskej strave nedostatok. Bez laktózy, bez lepku, kompletné aminokyselinové spektrum."
   },
   {
-    id:9, brand:"Prom-in", name:"CFM Pure Performance", fullName:"Prom-in CFM Pure Performance – 1000 g",
+    id:9, image:"https://gymbeam.sk/media/catalog/product/p/r/prom-in-cfm-pure-performance-cokolada.jpg", brand:"Prom-in", name:"CFM Pure Performance", fullName:"Prom-in CFM Pure Performance – 1000 g",
     type:"WPC", origin:"CZ", price:36.9, weight:1000, protein:83,
     flavors:["Čokoláda","Vanilka","Jahoda","Natural","Cookies","Karamel","Banán"],
     rating:4.7, lactoseFree:false, vegan:false, wheyBased:true,
@@ -431,7 +431,7 @@ const DB = [
     desc:"CFM Pure Performance je vlajkový produkt českého výrobcu Prom-in. Vyrobený metódou Cross-Flow Microfiltration (CFM) – najšetrnejší spôsob spracovania srvátky. 83 % bielkovín, dlhodobo najpredávanejší proteín na CZ/SK trhu s vynikajúcim pomerom cena/výkon."
   },
   {
-    id:10, brand:"Prom-in", name:"Wellness Whey", fullName:"Prom-in Wellness Whey – 2250 g",
+    id:10, image:"https://gymbeam.sk/media/catalog/product/p/r/prom-in-wellness-whey-cokolada.jpg", brand:"Prom-in", name:"Wellness Whey", fullName:"Prom-in Wellness Whey – 2250 g",
     type:"WPC", origin:"CZ", price:59.9, weight:2250, protein:80,
     flavors:["Čokoláda","Vanilka","Jahoda","Banán","Karamel","Cookies"],
     rating:4.6, lactoseFree:false, vegan:false, wheyBased:true,
@@ -443,7 +443,7 @@ const DB = [
     desc:"Prom-in Wellness Whey je ekonomické 2,25 kg balenie srvátkového koncentrátu. WPC z mlieka holandských kráv, 80 % bielkovín. Výborná cena na kilogram. Skvelý pre pravidelných cvičencov, ktorí spotrebujú veľké množstvo proteínu."
   },
   {
-    id:11, brand:"Nutrend", name:"100% Whey Protein", fullName:"Nutrend 100% Whey Protein – 1000 g",
+    id:11, image:"https://gymbeam.sk/media/catalog/product/n/u/nutrend-100-whey-protein-cokolada.jpg", brand:"Nutrend", name:"100% Whey Protein", fullName:"Nutrend 100% Whey Protein – 1000 g",
     type:"WPC", origin:"CZ", price:27.9, weight:1000, protein:78,
     flavors:["Čokoláda","Vanilka","Jahoda","Orech","Karamel","Cookies","Banán","Cappuccino"],
     rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
@@ -455,7 +455,7 @@ const DB = [
     desc:"Nutrend 100% Whey je nový reformulovaný proteín v 16 príchutiach. Dostupný v každom fitku, lekárni a e-shope na Slovensku. Čistý WPC s 78 % bielkovín za dostupnú cenu. Ideálny pre začiatočníkov aj pokročilých."
   },
   {
-    id:12, brand:"Nutrend", name:"Hydro Whey", fullName:"Nutrend Hydro Whey – 800 g",
+    id:12, image:"https://gymbeam.sk/media/catalog/product/n/u/nutrend-hydro-whey-cokolada.jpg", brand:"Nutrend", name:"Hydro Whey", fullName:"Nutrend Hydro Whey – 800 g",
     type:"WPH", origin:"CZ", price:49.9, weight:800, protein:87,
     flavors:["Čokoláda","Vanilka","Natural"],
     rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
@@ -467,7 +467,7 @@ const DB = [
     desc:"Nutrend Hydro Whey je hydrolyzovaný srvátkový proteín (WPH) – rýchlo vstrebateľný s 87 % bielkovín. Bez laktózy, minimálny obsah tuku a sacharidov. Pre profesionálnych športovcov a ľudí s laktózovou intoleranciou."
   },
   {
-    id:13, brand:"Nutrend", name:"Iso Whey Prozero", fullName:"Nutrend Iso Whey Prozero – 2250 g",
+    id:13, image:"https://gymbeam.sk/media/catalog/product/n/u/nutrend-iso-whey-prozero-cokolada.jpg", brand:"Nutrend", name:"Iso Whey Prozero", fullName:"Nutrend Iso Whey Prozero – 2250 g",
     type:"WPI", origin:"CZ", price:62.9, weight:2250, protein:85,
     flavors:["Čokoláda","Vanilka","Jahoda","Biela čokoláda","Cappuccino","Cookies"],
     rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
@@ -479,7 +479,7 @@ const DB = [
     desc:"Nutrend Iso Whey Prozero je srvátkový izolát bez laktózy a cukru v ekonomickom 2,25 kg balení. 85 % bielkovín na 100 g. Skvelá cena za kilogram pri veľkom balení. Dostupný v 6+ príchutiach."
   },
   {
-    id:14, brand:"GymBeam", name:"True Whey", fullName:"GymBeam True Whey – 1000 g",
+    id:14, image:"https://gymbeam.sk/media/catalog/product/g/y/gymbeam-true-whey-cokolada.jpg", brand:"GymBeam", name:"True Whey", fullName:"GymBeam True Whey – 1000 g",
     type:"WPC", origin:"SK", price:29.9, weight:1000, protein:78,
     flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies","Natural","Banán","Pistácia","Arašidové maslo"],
     rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
@@ -491,7 +491,7 @@ const DB = [
     desc:"GymBeam True Whey je vlajkový produkt slovenského e-shopu GymBeam. CFM spracovanie, 78 % bielkovín, 14 príchutí. GLP-1 friendly. Výborná cena, rýchle doručenie po celom Slovensku. Vhodný pre všetkých aktívnych ľudí."
   },
   {
-    id:15, brand:"GymBeam", name:"Pure IsoWhey", fullName:"GymBeam Pure IsoWhey – 1000 g",
+    id:15, image:"https://gymbeam.sk/media/catalog/product/g/y/gymbeam-pure-isowhey-cokolada.jpg", brand:"GymBeam", name:"Pure IsoWhey", fullName:"GymBeam Pure IsoWhey – 1000 g",
     type:"WPI", origin:"SK", price:44.9, weight:1000, protein:85,
     flavors:["Čokoláda","Vanilka","Jahoda","Natural","Karamel"],
     rating:4.5, lactoseFree:true, vegan:false, wheyBased:true,
@@ -503,7 +503,7 @@ const DB = [
     desc:"GymBeam Pure IsoWhey je srvátkový izolát (WPI) vyrobený kombináciou mikrofiltrácie a ultrafiltrácie. 85 % bielkovín, bez laktózy, minimum tuku a cukru. Pre ľudí s intoleranciou laktózy a náročných športovcov."
   },
   {
-    id:16, brand:"GymBeam", name:"Clear Whey IsoFue", fullName:"GymBeam Clear Whey IsoFue – 500 g",
+    id:16, image:"https://gymbeam.sk/media/catalog/product/g/y/gymbeam-clear-whey-isofue-vodny-melon.jpg", brand:"GymBeam", name:"Clear Whey IsoFue", fullName:"GymBeam Clear Whey IsoFue – 500 g",
     type:"WPI", origin:"SK", price:39.9, weight:500, protein:88,
     flavors:["Vodný melón","Broskyňový ľadový čaj","Citrón-limetka","Zelené jablko","Mango-marakuja"],
     rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
@@ -514,7 +514,7 @@ const DB = [
     desc:"Clear Whey IsoFue je transparentný srvátkový izolát s konzistenciou ovocnej limonády. 88 % bielkovín, bez cukru, bez tuku. Skvelý ako letný drink s ľadom. GLP-1 friendly. CFM spracovanie."
   },
   {
-    id:17, brand:"Kompava", name:"Whey Protein 80", fullName:"Kompava Whey Protein 80 – 2000 g",
+    id:17, image:"https://gymbeam.sk/media/catalog/product/k/o/kompava-whey-protein-80-cokolada.jpg", brand:"Kompava", name:"Whey Protein 80", fullName:"Kompava Whey Protein 80 – 2000 g",
     type:"WPC", origin:"SK", price:29.9, weight:2000, protein:80,
     flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Natural"],
     rating:4.3, lactoseFree:false, vegan:false, wheyBased:true,
@@ -526,7 +526,7 @@ const DB = [
     desc:"Kompava Whey Protein 80 je slovenský srvátkový koncentrát s 80 % bielkovín v ekonomickom 2 kg balení. Výrobca zameraný na čistotu a zdravie. Ideálny pre každodenné užívanie s výborným pomerom cena/výkon."
   },
   {
-    id:18, brand:"Koliba", name:"WPC 80 Protein", fullName:"Koliba WPC 80 Protein – 1000 g",
+    id:18, image:"https://gymbeam.sk/media/catalog/product/k/o/koliba-wpc-80-natural.jpg", brand:"Koliba", name:"WPC 80 Protein", fullName:"Koliba WPC 80 Protein – 1000 g",
     type:"WPC", origin:"SK", price:23.9, weight:1000, protein:80,
     flavors:["Natural"],
     rating:4.2, lactoseFree:false, vegan:false, wheyBased:true,
@@ -537,7 +537,7 @@ const DB = [
     desc:"Koliba WPC 80 je 100 % slovenský srvátkový proteínový koncentrát vyrobený z čerstvej srvátky tuzemského pôvodu. Chutný a dobre rozpustný, ~80 % bielkovín. Bez umelých farbív a plnidiel. Pre tých, ktorí chcú podporiť slovenského výrobcu."
   },
   {
-    id:19, brand:"Aktin (Vilgain)", name:"Whey Protein", fullName:"Aktin Srvátkový proteín – 1000 g",
+    id:19, image:"https://gymbeam.sk/media/catalog/product/a/k/aktin-srvatkovy-protein-cokolada.jpg", brand:"Aktin (Vilgain)", name:"Whey Protein", fullName:"Aktin Srvátkový proteín – 1000 g",
     type:"WPC", origin:"CZ", price:28.9, weight:1000, protein:76,
     flavors:["Čokoláda","Vanilka","Slaný karamel","Natural"],
     rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
@@ -549,7 +549,7 @@ const DB = [
     desc:"Aktin (e-shop skupiny Vilgain) Srvátkový proteín z mlieka kráv voľne sa pasúcich na írskych farmách. 100 % prírodný, sladený stéviou, prírodné arómy. Bez umelých sladidiel a farbív. Krémová konzistencia, výborná chuť."
   },
   {
-    id:20, brand:"BioTech USA", name:"Iso Whey Zero", fullName:"BioTech USA Iso Whey Zero – 500 g",
+    id:20, image:"https://gymbeam.sk/media/catalog/product/b/i/biotech-usa-iso-whey-zero-cokolada.jpg", brand:"BioTech USA", name:"Iso Whey Zero", fullName:"BioTech USA Iso Whey Zero – 500 g",
     type:"WPI", origin:"EU", price:29.9, weight:500, protein:86,
     flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies","Banán","Biela čokoláda"],
     rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
@@ -561,7 +561,7 @@ const DB = [
     desc:"BioTech USA Iso Whey Zero je srvátkový izolát bez laktózy, cukru, glukózy a farbív. 86 % bielkovín. Maďarská značka s celoeurópskou distribúciou dostupná na Slovensku. 7+ príchutí. Ideálny pri laktózovej intoleranc ii a pri redukcii."
   },
   {
-    id:21, brand:"Scitec Nutrition", name:"100% Whey Professional", fullName:"Scitec 100% Whey Professional – 2350 g",
+    id:21, image:"https://gymbeam.sk/media/catalog/product/s/c/scitec-100-whey-professional-cokolada.jpg", brand:"Scitec Nutrition", name:"100% Whey Professional", fullName:"Scitec 100% Whey Professional – 2350 g",
     type:"WPC", origin:"EU", price:42.9, weight:2350, protein:77,
     flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies","Orech","Banán","Pistácia","Cappuccino"],
     rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
@@ -573,7 +573,7 @@ const DB = [
     desc:"Scitec 100% Whey Professional je maďarský srvátkový proteín preslávený výbornými príchuťami. Dostupný v 2,35 kg balení za výbornú cenu. Zmes WPC a WPI. Viac ako 20 príchutí – najlepší výber pre tých, komu záleží na chuti."
   },
   {
-    id:22, brand:"MyProtein", name:"Impact Whey Protein", fullName:"MyProtein Impact Whey Protein – 1000 g",
+    id:22, image:"https://gymbeam.sk/media/catalog/product/m/y/myprotein-impact-whey-protein-cokolada.jpg", brand:"MyProtein", name:"Impact Whey Protein", fullName:"MyProtein Impact Whey Protein – 1000 g",
     type:"WPC", origin:"EU", price:29.9, weight:1000, protein:79,
     flavors:["Čokoláda","Vanilka","Jahoda","Natural","Karamel","Cookies","Orech","Banán"],
     rating:4.4, lactoseFree:false, vegan:false, wheyBased:true,
@@ -585,7 +585,7 @@ const DB = [
     desc:"MyProtein Impact Whey je jeden z najpredávanejších proteínov na svete. Britský výrobca s priamym doručením na Slovensko. 79 % bielkovín, výborná cena pri akciách (často -40%). Viac ako 50 príchutí."
   },
   {
-    id:23, brand:"ESN", name:"Designer Whey", fullName:"ESN Designer Whey Protein – 1000 g",
+    id:23, image:"https://gymbeam.sk/media/catalog/product/e/s/esn-designer-whey-cokolada.jpg", brand:"ESN", name:"Designer Whey", fullName:"ESN Designer Whey Protein – 1000 g",
     type:"WPC", origin:"EU", price:38.9, weight:1000, protein:81,
     flavors:["Čokoláda","Vanilka","Cookies","Karamel","Orech","Jahoda"],
     rating:4.6, lactoseFree:false, vegan:false, wheyBased:true,
@@ -597,7 +597,7 @@ const DB = [
     desc:"ESN Designer Whey je momentálne najrýchlejšie rastúci nemecký proteín aj na SK trhu. 81 % bielkovín, prémiové nemecké suroviny, výnimočne krémové príchute. Obľúbený hlavne pre svoju chuť a textúru."
   },
   {
-    id:24, brand:"Dymatize", name:"ISO100 Hydrolyzed", fullName:"Dymatize ISO100 Hydrolyzed – 620 g",
+    id:24, image:"https://gymbeam.sk/media/catalog/product/d/y/dymatize-iso100-hydrolyzed-cokolada.jpg", brand:"Dymatize", name:"ISO100 Hydrolyzed", fullName:"Dymatize ISO100 Hydrolyzed – 620 g",
     type:"WPH", origin:"Global", price:59.9, weight:620, protein:90,
     flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies"],
     rating:4.8, lactoseFree:true, vegan:false, wheyBased:true,
@@ -609,7 +609,7 @@ const DB = [
     desc:"Dymatize ISO100 je hydrolyzovaný srvátkový izolát s 90 % bielkovín – najrýchlejšie vstrebateľný proteín dostupný na trhu. Bez laktózy, bez cukru. Certifikovaný pre profesionálnych športovcov. Americká prémiová značka dostupná v SR."
   },
   {
-    id:25, brand:"Optimum Nutrition", name:"Gold Standard 100% Whey", fullName:"Optimum Nutrition Gold Standard 100% Whey – 900 g",
+    id:25, image:"https://gymbeam.sk/media/catalog/product/o/p/on-gold-standard-whey-cokolada.jpg", brand:"Optimum Nutrition", name:"Gold Standard 100% Whey", fullName:"Optimum Nutrition Gold Standard 100% Whey – 900 g",
     type:"Blend", origin:"Global", price:47.9, weight:900, protein:80,
     flavors:["Čokoláda","Vanilka","Jahoda","Cookies","Karamel","Banán"],
     rating:4.8, lactoseFree:false, vegan:false, wheyBased:true,
@@ -622,44 +622,9 @@ const DB = [
   }
 ];
 
-/* ═══════════════════════
-   IMAGE LOADING via Anthropic API
-═══════════════════════ */
-const imgCache = {};
+/* Static images: use product.image */
 
-async function fetchProductImage(product) {
-  const key = `img_${product.id}`;
-  if (imgCache[key]) return imgCache[key];
-  
-  try {
-    const query = `${product.brand} ${product.name} protein powder product photo official`;
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 200,
-        tools: [{"type": "web_search_20250305", "name": "web_search"}],
-        messages: [{
-          role: "user",
-          content: `Find the official product image URL for: ${product.brand} ${product.name} protein powder.
-Return ONLY a single valid direct image URL (jpg, png, or webp) from the official brand website or major retailer (gymbeam.sk, vilgain.sk, voxberg.com, nutrend.sk, bodyworld.eu, etc).
-Format: just the URL, nothing else.`
-        }]
-      })
-    });
-    const data = await resp.json();
-    const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-    const urlMatch = text.match(/https?:\/\/[^\s"'<>\]]+\.(?:jpg|jpeg|png|webp)/i);
-    if (urlMatch) {
-      imgCache[key] = urlMatch[0];
-      return urlMatch[0];
-    }
-  } catch(e) {}
-  return null;
-}
 
-/* ═══════════════════════
    FILTER STATE
 ═══════════════════════ */
 let F = {search:"", origin:"all", type:"all", whey:"all", flavor:"all", weight:"all", price:150, prot:60, rating:0, lactose:"all"};
@@ -744,28 +709,10 @@ function render() {
       </div>
     </div>`).join("");
 
-  // Load images asynchronously
-  active.forEach(p => loadCardImage(p));
+  // Images static via p.image
 }
 
-async function loadCardImage(p) {
-  const imgEl = document.getElementById(`img${p.id}`);
-  const liEl = document.getElementById(`li${p.id}`);
-  const phEl = document.getElementById(`ph${p.id}`);
-  if (!imgEl) return;
 
-  const url = await fetchProductImage(p);
-  if (!imgEl) return; // might have been re-rendered
-  
-  if (url) {
-    imgEl.src = url;
-    imgEl.style.display = "";
-    if (liEl) liEl.style.display = "none";
-  } else {
-    if (phEl) phEl.style.display = "flex";
-    if (liEl) liEl.style.display = "none";
-  }
-}
 
 /* ═══════════════════════
    MODAL
@@ -829,21 +776,10 @@ function openModal(id) {
   document.getElementById("ovl").classList.add("open");
   document.body.style.overflow = "hidden";
 
-  // Load modal image
-  loadModalImage(p);
+
 }
 
-async function loadModalImage(p) {
-  const mw = document.getElementById(`mimg${p.id}`);
-  if (!mw) return;
-  const url = await fetchProductImage(p);
-  if (!mw) return;
-  if (url) {
-    mw.innerHTML = `<img src="${url}" alt="${p.brand} ${p.name}" style="width:100%;height:100%;object-fit:contain;padding:18px" onerror="this.parentNode.innerHTML='<div style=\\'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:100%\\'><span style=\\'font-size:52px\\'>${ico(p.origin)}</span><span style=\\'font-size:12px;font-weight:600;color:var(--t3)\\'>${p.brand}</span></div>'">`;
-  } else {
-    mw.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:100%"><span style="font-size:52px">${ico(p.origin)}</span><span style="font-size:12px;font-weight:600;color:var(--t3)">${p.brand}</span></div>`;
-  }
-}
+
 
 function closeModal() {
   document.getElementById("ovl").classList.remove("open");
