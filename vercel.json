@@ -2,9 +2,5 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "buildCommand": "",
-  "outputDirectory": ".",
-  "cleanUrls": false,
-  "redirects": [
-    { "source": "/", "destination": "/protein-db.html", "permanent": false }
-  ]
+  "outputDirectory": "."
 }

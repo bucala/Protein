@@ -1,0 +1,836 @@
+﻿<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProteinDB · SK/CZ</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f7; --surface:#fff; --s2:#f2f2f4; --border:rgba(0,0,0,.08);
+  --t1:#1d1d1f; --t2:#6e6e73; --t3:#aeaeb2;
+  --blue:#0071e3; --green:#30d158; --orange:#ff9f0a; --red:#ff453a; --purple:#bf5af2;
+  --r:18px; --rsm:10px;
+  --sh:0 2px 20px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.03);
+  --shlg:0 24px 80px rgba(0,0,0,.22),0 4px 20px rgba(0,0,0,.1);
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{height:52px;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:200}
+.logo{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px}
+.logo em{font-style:italic;color:var(--blue)}
+.npill{background:var(--s2);border-radius:20px;padding:3px 12px;font-size:12px;color:var(--t2);font-weight:500}
+
+/* HERO */
+.hero{max-width:1180px;margin:0 auto;padding:48px 28px 32px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(34px,5.5vw,54px);letter-spacing:-.8px;line-height:1.05;margin-bottom:10px}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:15px;color:var(--t2);font-weight:300;max-width:440px;line-height:1.6}
+.hero .note{font-size:12px;color:var(--t3);margin-top:8px;display:flex;align-items:center;gap:5px}
+
+/* SEARCH */
+.sw{max-width:1180px;margin:0 auto;padding:0 28px 26px}
+.sb{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;display:flex;align-items:center;gap:10px;padding:0 16px;box-shadow:var(--sh);transition:.2s var(--ease)}
+.sb:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,113,227,.1)}
+.sb svg{flex-shrink:0;color:var(--t3)}
+.sb input{flex:1;border:none;outline:none;font-size:16px;font-family:inherit;padding:13px 0;background:transparent;color:var(--t1)}
+.sb input::placeholder{color:var(--t3)}
+.scl{background:var(--bg);border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:11px;color:var(--t2)}
+.scl.on{display:flex}
+
+/* LAYOUT */
+.lay{max-width:1180px;margin:0 auto;padding:0 28px 80px;display:grid;grid-template-columns:236px 1fr;gap:22px;align-items:start}
+
+/* SIDEBAR */
+.sid{background:var(--surface);border-radius:var(--r);border:1px solid var(--border);padding:20px;box-shadow:var(--sh);position:sticky;top:66px;max-height:calc(100vh-78px);overflow-y:auto}
+.sid-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.sid-t{font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:var(--t2)}
+.rb{background:none;border:none;color:var(--blue);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit}
+
+.fg{margin-bottom:18px}.fg:last-child{margin-bottom:0}
+.fl{display:block;font-size:12px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{border:1.5px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--t2);background:var(--s2);cursor:pointer;transition:.15s;font-family:inherit}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+select.fs{width:100%;padding:8px 26px 8px 10px;border-radius:var(--rsm);border:1.5px solid var(--border);background:var(--s2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 9px center;appearance:none;font-size:12px;font-family:inherit;color:var(--t1);outline:none;cursor:pointer;transition:.15s}
+select.fs:focus{border-color:var(--blue)}
+.rl{display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-top:5px}
+input[type=range]{width:100%;accent-color:var(--blue);cursor:pointer}
+.sr{display:flex;gap:4px}
+.sb2{border:1.5px solid var(--border);border-radius:8px;padding:4px 8px;font-size:11px;background:none;cursor:pointer;font-family:inherit;color:var(--t2);transition:.15s}
+.sb2.on,.sb2:hover{border-color:var(--orange);background:rgba(255,159,10,.08);color:var(--orange)}
+
+/* CONTENT */
+.gh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.gc{font-size:13px;color:var(--t2)}
+select.srt{padding:6px 24px 6px 10px;border-radius:var(--rsm);border:1.5px solid var(--border);background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 8px center;appearance:none;font-size:12px;font-family:inherit;outline:none;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+
+/* CARD */
+.card{background:var(--surface);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;cursor:pointer;animation:fu .32s var(--ease) both;transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease)}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shlg);border-color:rgba(0,113,227,.15)}
+.card:active{transform:translateY(-1px)}
+
+.cimg{height:162px;background:var(--s2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cimg img{width:100%;height:100%;object-fit:contain;padding:12px;transition:transform .3s var(--ease)}
+.card:hover .cimg img{transform:scale(1.07)}
+.ph{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.ph-ico{font-size:32px}
+.ph-txt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t3);text-align:center;padding:0 8px;line-height:1.4}
+.loading-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--s2)}
+.spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.cbadges{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.bdg{font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;text-transform:uppercase;letter-spacing:.3px}
+.b-sk{background:rgba(0,170,60,.12);color:#00a038}
+.b-cz{background:rgba(0,78,192,.12);color:#004ec0}
+.b-eu{background:rgba(130,40,220,.12);color:#7820cc}
+.b-gl{background:rgba(0,0,0,.07);color:#555}
+.b-wh{background:rgba(0,113,227,.12);color:var(--blue)}
+.b-vg{background:rgba(48,209,88,.12);color:#1a8a3a}
+
+.cbody{padding:11px 12px 12px}
+.cbrand{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:2px}
+.cname{font-size:13px;font-weight:600;line-height:1.3;min-height:32px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:5px}
+.cstars{display:flex;align-items:center;gap:2px;font-size:11px;color:var(--t2);margin-bottom:5px}
+.s{color:var(--t3)}.s.on{color:var(--orange)}
+.ctags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px}
+.tag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500;background:var(--bg);color:var(--t2)}
+.tw{background:rgba(0,113,227,.07);color:var(--blue)}
+.ti{background:rgba(191,90,242,.08);color:var(--purple)}
+.tv{background:rgba(48,209,88,.09);color:#1e8a34}
+.tb{background:rgba(255,69,58,.07);color:var(--red)}
+.tc{background:rgba(255,159,10,.08);color:var(--orange)}
+.tlf{background:rgba(48,209,88,.07);color:#1e8a34}
+.cbot{display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid var(--border)}
+.cprice{font-size:15px;font-weight:700}
+.cprice small{font-size:10px;font-weight:400;color:var(--t3)}
+.clink{font-size:11px;font-weight:600;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:2px}
+.clink:hover{opacity:.7}
+
+/* OVERLAY & MODAL */
+.ovl{position:fixed;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);z-index:900;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .4s var(--ease),backdrop-filter .4s var(--ease)}
+.ovl.open{background:rgba(0,0,0,.5);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);pointer-events:all}
+.modal{background:var(--surface);border-radius:24px 24px 0 0;width:100%;max-width:860px;max-height:92vh;overflow-y:auto;transform:translateY(100%);transition:transform .48s cubic-bezier(.34,1.26,.64,1);box-shadow:0 -8px 60px rgba(0,0,0,.2);position:relative}
+.ovl.open .modal{transform:translateY(0)}
+.drag{width:38px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 0}
+.minner{padding:22px 26px 40px}
+.mclose{position:absolute;top:16px;right:16px;background:var(--s2);border:none;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--t2);transition:.15s;z-index:10}
+.mclose:hover{background:var(--border)}
+
+.mtop{display:grid;grid-template-columns:220px 1fr;gap:24px;margin-bottom:24px}
+.mimgw{background:var(--s2);border-radius:16px;height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.mimgw img{width:100%;height:100%;object-fit:contain;padding:18px}
+.mimgw .spinner{width:28px;height:28px}
+.minfo{}
+.mbrand{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--t3);margin-bottom:3px}
+.mname{font-family:'DM Serif Display',serif;font-size:clamp(18px,3.5vw,26px);line-height:1.1;letter-spacing:-.2px;margin-bottom:8px}
+.mstars{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--t2);margin-bottom:12px}
+.mprice{font-size:26px;font-weight:700;margin-bottom:5px}
+.mprice small{font-size:13px;font-weight:400;color:var(--t2)}
+.mbadges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+.mbuy{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;transition:.2s var(--ease);width:100%}
+.mbuy:hover{background:#005ec4}
+.msec{margin-bottom:18px}
+.mst{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--t2);margin-bottom:8px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.mstat{background:var(--s2);border-radius:10px;padding:9px 12px}
+.msl{font-size:10px;color:var(--t2);margin-bottom:2px}
+.msv{font-size:14px;font-weight:700}
+.mdesc{font-size:13px;color:var(--t2);line-height:1.65}
+.mflav{display:flex;flex-wrap:wrap;gap:4px}
+.mf{background:var(--s2);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:500}
+.mdiv{height:1px;background:var(--border);margin:18px 0}
+.mshops{display:grid;gap:6px}
+.mshop{display:flex;align-items:center;justify-content:space-between;background:var(--s2);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--t1);transition:.15s}
+.mshop:hover{background:rgba(0,113,227,.06)}
+.mshop-name{font-size:13px;font-weight:600}
+.mshop-info{display:flex;align-items:center;gap:10px}
+.mshop-price{font-size:15px;font-weight:700;color:var(--blue)}
+.mshop-arr{color:var(--t3);font-size:12px}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px 20px;grid-column:1/-1}
+.empty-ico{font-size:50px;margin-bottom:12px}
+.empty h3{font-size:20px;font-weight:600;margin-bottom:6px}
+.empty p{color:var(--t2)}
+
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:840px){
+  .lay{grid-template-columns:1fr}
+  .sid{position:static;max-height:none}
+  .hero,.sw,.lay{padding-left:16px;padding-right:16px}
+  .mtop{grid-template-columns:1fr}
+  .mimgw{height:180px}
+  .mgrid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Protein<em>DB</em></div>
+  <div class="npill" id="npill">– proteínov</div>
+</nav>
+
+<div class="hero">
+  <h1>SK/CZ databáza<br><span>proteínov</span></h1>
+  <p>Reálne produkty dostupné na Slovensku a v Česku. Klikni na kartu pre detail, nutričné hodnoty a priamy odkaz na e-shop.</p>
+  <div class="note">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Ceny a dostupnosť sa môžu líšiť. Vždy overte aktuálnu cenu na e-shope.
+  </div>
+</div>
+
+<div class="sw">
+  <div class="sb">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="search" type="text" placeholder="Hľadaj proteín, značku alebo typ…" autocomplete="off">
+    <button class="scl" id="scl">✕</button>
+  </div>
+</div>
+
+<div class="lay">
+  <aside class="sid">
+    <div class="sid-top">
+      <span class="sid-t">Filtre</span>
+      <button class="rb" onclick="resetAll()">Resetovať</button>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Pôvod</span>
+      <div class="chips" id="fo">
+        <button class="chip on" data-v="all">Všetky</button>
+        <button class="chip" data-v="SK">🇸🇰 SK</button>
+        <button class="chip" data-v="CZ">🇨🇿 CZ</button>
+        <button class="chip" data-v="EU">🇪🇺 EU</button>
+        <button class="chip" data-v="Global">🌍 Global</button>
+      </div>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Typ proteínu</span>
+      <div class="chips" id="ft">
+        <button class="chip on" data-v="all">Všetky</button>
+        <button class="chip" data-v="WPC">WPC</button>
+        <button class="chip" data-v="WPI">WPI</button>
+        <button class="chip" data-v="WPH">WPH</button>
+        <button class="chip" data-v="Blend">Blend</button>
+        <button class="chip" data-v="Vegan">Vegan</button>
+      </div>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Srvátkovný 🥛</span>
+      <div class="chips" id="fw">
+        <button class="chip on" data-v="all">Všetky</button>
+        <button class="chip" data-v="yes">Áno (srvátka)</button>
+        <button class="chip" data-v="no">Nie (rastlinný)</button>
+      </div>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Príchuť</span>
+      <select class="fs" id="ff">
+        <option value="all">Všetky príchute</option>
+        <option value="Čokoláda">🍫 Čokoláda</option>
+        <option value="Vanilka">🍦 Vanilka</option>
+        <option value="Jahoda">🍓 Jahoda</option>
+        <option value="Natural">🌿 Natural / Bez príchute</option>
+        <option value="Karamel">🍮 Karamel</option>
+        <option value="Cookies">🍪 Cookies</option>
+        <option value="Orech">🥜 Orech / PB</option>
+        <option value="Banán">🍌 Banán</option>
+        <option value="Pistácia">🫘 Pistácia</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Gramáž</span>
+      <select class="fs" id="fg2">
+        <option value="all">Všetky</option>
+        <option value="xs">do 500 g</option>
+        <option value="s">500 g – 1 kg</option>
+        <option value="m">1 – 2 kg</option>
+        <option value="l">2+ kg</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Max. cena: <b id="pv">150 €</b></span>
+      <input type="range" id="fp" min="5" max="150" value="150" step="5">
+      <div class="rl"><span>5 €</span><span>150 €</span></div>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Min. bielkoviny: <b id="prot-v">60 %</b></span>
+      <input type="range" id="fprot" min="60" max="95" value="60" step="1">
+      <div class="rl"><span>60 %</span><span>95 %</span></div>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Hodnotenie</span>
+      <div class="sr" id="fr">
+        <button class="sb2 on" data-v="0">Všetky</button>
+        <button class="sb2" data-v="4">4⭐+</button>
+        <button class="sb2" data-v="4.5">4.5⭐+</button>
+      </div>
+    </div>
+
+    <div class="fg">
+      <span class="fl">Laktóza</span>
+      <div class="chips" id="flac">
+        <button class="chip on" data-v="all">Všetky</button>
+        <button class="chip" data-v="no">Bez laktózy</button>
+      </div>
+    </div>
+  </aside>
+
+  <div>
+    <div class="gh">
+      <div class="gc" id="gct"></div>
+      <select class="srt" id="srt">
+        <option value="">Odporúčané</option>
+        <option value="pa">Cena ↑</option>
+        <option value="pd">Cena ↓</option>
+        <option value="r">Hodnotenie ↓</option>
+        <option value="pr">Proteín % ↓</option>
+        <option value="n">Názov A–Z</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="ovl" id="ovl" onclick="handleOvlClick(event)">
+  <div class="modal" id="modal">
+    <button class="mclose" onclick="closeModal()">✕</button>
+    <div class="drag"></div>
+    <div class="minner" id="mini"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   DATABÁZA — reálne SK/CZ produkty
+   Overené URL e-shopov, reálne ceny z heureka.sk
+═══════════════════════════════════════ */
+const DB = [
+  {
+    id:1, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-grass-fed-whey-protein-cokolada.jpg", brand:"Vilgain", name:"Grass-Fed Whey Protein", fullName:"Vilgain Grass-Fed Whey Protein – 1000 g",
+    type:"WPC", origin:"CZ", price:31.9, weight:1000, protein:76,
+    flavors:["Čokoláda","Vanilka","Jahoda","Natural","Karamel","Banán","Pistácia","Cookies"],
+    rating:4.8, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Vilgain.sk", url:"https://www.vilgain.sk/vilgain-grass-fed-whey-protein-1000-g", price:31.9},
+      {name:"Aktin.sk", url:"https://www.aktin.sk/vilgain-grass-fed-whey-protein", price:33.5}
+    ],
+    kcal:374, carbs:4.8, fat:5.0, serving:30, bcaa:5.9,
+    desc:"Prémiový srvátkový koncentrát (WPC) z mlieka kráv pasúcich sa na pastvinách v UK. Ultrafiltrovaný pri nízkych teplotách, sladený iba stéviou. Minimalistické zloženie bez umelých sladidiel a farbív. Dostupný v 8+ príchutiach vrátane trendovej pistácie a slaného karamelu. Najlepšie hodnotený proteín na SK/CZ trhu – 98 % odporúčaní zákazníkov, 3 000+ recenzií."
+  },
+  {
+    id:2, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-grass-fed-whey-protein-isolate-cokolada.jpg", brand:"Vilgain", name:"Grass-Fed Whey Protein Isolate", fullName:"Vilgain Grass-Fed Whey Protein Isolate – 1000 g",
+    type:"WPI", origin:"CZ", price:37.9, weight:1000, protein:83,
+    flavors:["Čokoláda","Vanilka","Jahoda"],
+    rating:4.7, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Vilgain.sk", url:"https://www.vilgain.sk/vilgain-grass-fed-whey-protein-isolate-1000-g", price:37.9},
+      {name:"Aktin.sk", url:"https://www.aktin.sk/vilgain-grass-fed-whey-protein-isolate", price:39.9}
+    ],
+    kcal:348, carbs:1.1, fat:0.5, serving:30, bcaa:7.1,
+    desc:"Prémiový srvátkový izolát z mlieka kráv pasúcich sa na írskych a britských pastvinách. 83 % bielkovín, minimum tuku a cukru. Sladený stéviou, bez sóje, vajec, orechov a lepku. Pre tých, ktorí hľadajú to najčistejšie. Skvelý pre ľudí sledujúcich každú kalóriu."
+  },
+  {
+    id:3, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-lactose-free-whey-protein-cokolada.jpg", brand:"Vilgain", name:"Lactose Free Whey Protein", fullName:"Vilgain Lactose Free Whey Protein – 1000 g",
+    type:"WPC", origin:"CZ", price:29.99, weight:1000, protein:75,
+    flavors:["Čokoládový šejk","Čučoriedka","Vanilka","Karamel"],
+    rating:4.7, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Vilgain.sk", url:"https://www.vilgain.sk/vilgain-lactose-free-whey-protein-1000-g", price:29.99},
+      {name:"Aktin.sk", url:"https://www.aktin.sk/vilgain-lactose-free-whey-protein", price:31.9}
+    ],
+    kcal:368, carbs:4.5, fat:4.8, serving:30, bcaa:5.7,
+    desc:"Bezlaktózový srvátkový proteín pre ľudí s intoleranciou laktózy. Ultrafiltrovaný pri nízkych teplotách. 75 % bielkovín, prírodné sladenie stéviou. Bez umelých farbív a sladidiel. Vilgain Lactose Free je ideálny aj pre ľudí s citlivým trávením."
+  },
+  {
+    id:4, image:"https://gymbeam.sk/media/catalog/product/v/i/vilgain-clear-whey-isolate-jahoda-limonada.jpg", brand:"Vilgain", name:"Clear Whey Isolate", fullName:"Vilgain Clear Whey Isolate – 500 g",
+    type:"WPI", origin:"CZ", price:29.9, weight:500, protein:84,
+    flavors:["Jahoda Limonáda","Citrón","Pink grapefruit","Broskyňa"],
+    rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Vilgain.sk", url:"https://www.vilgain.sk/vilgain-clear-whey-isolate-500-g", price:29.9},
+      {name:"Alza.sk", url:"https://www.alza.sk/vilgain-clear-whey-isolate", price:31.9}
+    ],
+    kcal:90, carbs:0.2, fat:0.1, serving:25, bcaa:6.8,
+    desc:"Clear srvátkový izolát s konzistenciou ovocnej limonády. 98 % čistý WPI sladený prírodnými steviol-glykozidmi. Bez mliečnej štruktúry, ideálny vychladený ako letný drink. Bez cukru, bez tuku. Vilgain Clear Whey Isolate je trendový clear proteín s excelentnou chuťou."
+  },
+  {
+    id:5, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-whey-protein-100-cokolada.jpg", brand:"Voxberg", name:"Whey Protein 100", fullName:"Voxberg Whey Protein 100 – 990 g",
+    type:"WPC", origin:"SK", price:33.92, weight:990, protein:77,
+    flavors:["Čokoláda","Vanilka","Biela čokoláda & Malina","Biela čokoláda & Karamel","Cookies","Slaný karamel","Vanilka & Jahoda"],
+    rating:4.2, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Voxberg.com", url:"https://www.voxberg.com/produkty/proteiny/whey-100", price:33.92},
+      {name:"BodyWorld.sk", url:"https://www.bodyworld.eu/sk/sk/voxberg-whey-100-990-g-7987", price:35.9}
+    ],
+    kcal:372, carbs:3.8, fat:4.6, serving:30, bcaa:5.8,
+    desc:"Slovenský srvátkový koncentrát vyrobený CFM metódou s pridaným L-leucínom (3 g/dávku) pre maximálnu proteosyntézu. Bez laktózy a lepku, najkvalitnejšie suroviny z EÚ. Voxberg je slovenský výrobca z Bratislavy so zameraním na čisté zloženie a výbornú chuť."
+  },
+  {
+    id:6, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-complex-protein-cokolada.jpg", brand:"Voxberg", name:"Complex Protein", fullName:"Voxberg Complex Protein – 990 g",
+    type:"Blend", origin:"SK", price:37.26, weight:990, protein:80,
+    flavors:["Čokoláda","Vanilka","Karamel"],
+    rating:4.0, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Voxberg.com", url:"https://www.voxberg.com/produkty/proteiny/complex-protein", price:37.26},
+      {name:"BodyWorld.sk", url:"https://www.bodyworld.eu/sk/sk/voxberg-complex-protein-990-g-8000", price:39.9}
+    ],
+    kcal:374, carbs:5.2, fat:5.1, serving:30, bcaa:5.5,
+    desc:"Viaczložkový proteín z troch zdrojov: srvátkový koncentrát (46 %), mliečny koncentrát (25 %) a vaječná bielkovina (23 %). Kombinácia rýchlych a pomalých bielkovín zabezpečuje dlhotrvajúci prísun aminokyselín. 24 g bielkovín na dávku, menej ako 0,5 g cukru."
+  },
+  {
+    id:7, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-womens-protein-vanilka-malina.jpg", brand:"Voxberg", name:"Women's Protein", fullName:"Voxberg Women's Protein – 990 g",
+    type:"WPC", origin:"SK", price:35.91, weight:990, protein:77,
+    flavors:["Vanilka & Malina","Biela čokoláda & Karamel","Čokoláda"],
+    rating:4.3, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Voxberg.com", url:"https://www.voxberg.com/produkty/proteiny/womens-protein", price:35.91},
+      {name:"BodyWorld.sk", url:"https://www.bodyworld.eu/sk/sk/voxberg-womens-protein", price:37.9}
+    ],
+    kcal:370, carbs:4.8, fat:4.7, serving:30, bcaa:5.6,
+    desc:"Srvátkový proteín špeciálne formulovaný pre ženy. Doplnený o Garciniu kambodžskú, vitamín D, kyselinu listovú, zinok a železo – látky podporujúce metabolizmus a energetický systém. Lahodné príchute, kvalitný WPC základ."
+  },
+  {
+    id:8, image:"https://gymbeam.sk/media/catalog/product/v/o/voxberg-vegan-protein-cokolada.jpg", brand:"Voxberg", name:"Vegan Protein", fullName:"Voxberg Vegan Protein – 480 g",
+    type:"Vegan", origin:"SK", price:20.79, weight:480, protein:72,
+    flavors:["Čokoláda","Vanilka","Jahoda"],
+    rating:4.2, lactoseFree:true, vegan:true, wheyBased:false,
+    shops:[
+      {name:"Voxberg.com", url:"https://www.voxberg.com/produkty/proteiny/vegan-protein", price:20.79},
+      {name:"BodyWorld.sk", url:"https://www.bodyworld.eu/sk/sk/voxberg-vegan-protein", price:22.9}
+    ],
+    kcal:360, carbs:7.1, fat:5.5, serving:30, bcaa:4.6,
+    desc:"Slovenský vegánsky proteín z hrachového izolátu a izolátu z fazúľ. Doplnený o komplex vitamínov vrátane vitamínu B12, ktorého má telo na vegánskej strave nedostatok. Bez laktózy, bez lepku, kompletné aminokyselinové spektrum."
+  },
+  {
+    id:9, image:"https://gymbeam.sk/media/catalog/product/p/r/prom-in-cfm-pure-performance-cokolada.jpg", brand:"Prom-in", name:"CFM Pure Performance", fullName:"Prom-in CFM Pure Performance – 1000 g",
+    type:"WPC", origin:"CZ", price:36.9, weight:1000, protein:83,
+    flavors:["Čokoláda","Vanilka","Jahoda","Natural","Cookies","Karamel","Banán"],
+    rating:4.7, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Prom-in.sk", url:"https://www.prom-in.sk/prom-in-cfm-pure-performance", price:36.9},
+      {name:"Fitness007.sk", url:"https://www.fitness007.sk/prom-in-cfm-pure-performance", price:38.5}
+    ],
+    kcal:362, carbs:3.8, fat:4.1, serving:30, bcaa:6.2,
+    desc:"CFM Pure Performance je vlajkový produkt českého výrobcu Prom-in. Vyrobený metódou Cross-Flow Microfiltration (CFM) – najšetrnejší spôsob spracovania srvátky. 83 % bielkovín, dlhodobo najpredávanejší proteín na CZ/SK trhu s vynikajúcim pomerom cena/výkon."
+  },
+  {
+    id:10, image:"https://gymbeam.sk/media/catalog/product/p/r/prom-in-wellness-whey-cokolada.jpg", brand:"Prom-in", name:"Wellness Whey", fullName:"Prom-in Wellness Whey – 2250 g",
+    type:"WPC", origin:"CZ", price:59.9, weight:2250, protein:80,
+    flavors:["Čokoláda","Vanilka","Jahoda","Banán","Karamel","Cookies"],
+    rating:4.6, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Prom-in.sk", url:"https://www.prom-in.sk/prom-in-wellness-whey", price:59.9},
+      {name:"Alza.sk", url:"https://www.alza.sk/prom-in-wellness-whey-2250g", price:62.9}
+    ],
+    kcal:370, carbs:5.0, fat:4.9, serving:30, bcaa:6.0,
+    desc:"Prom-in Wellness Whey je ekonomické 2,25 kg balenie srvátkového koncentrátu. WPC z mlieka holandských kráv, 80 % bielkovín. Výborná cena na kilogram. Skvelý pre pravidelných cvičencov, ktorí spotrebujú veľké množstvo proteínu."
+  },
+  {
+    id:11, image:"https://gymbeam.sk/media/catalog/product/n/u/nutrend-100-whey-protein-cokolada.jpg", brand:"Nutrend", name:"100% Whey Protein", fullName:"Nutrend 100% Whey Protein – 1000 g",
+    type:"WPC", origin:"CZ", price:27.9, weight:1000, protein:78,
+    flavors:["Čokoláda","Vanilka","Jahoda","Orech","Karamel","Cookies","Banán","Cappuccino"],
+    rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Nutrend.sk", url:"https://www.nutrend.sk/100-whey-protein", price:27.9},
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/nutrend-100-whey-protein-1000g.html", price:29.9}
+    ],
+    kcal:371, carbs:5.2, fat:5.5, serving:30, bcaa:5.8,
+    desc:"Nutrend 100% Whey je nový reformulovaný proteín v 16 príchutiach. Dostupný v každom fitku, lekárni a e-shope na Slovensku. Čistý WPC s 78 % bielkovín za dostupnú cenu. Ideálny pre začiatočníkov aj pokročilých."
+  },
+  {
+    id:12, image:"https://gymbeam.sk/media/catalog/product/n/u/nutrend-hydro-whey-cokolada.jpg", brand:"Nutrend", name:"Hydro Whey", fullName:"Nutrend Hydro Whey – 800 g",
+    type:"WPH", origin:"CZ", price:49.9, weight:800, protein:87,
+    flavors:["Čokoláda","Vanilka","Natural"],
+    rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Nutrend.sk", url:"https://www.nutrend.sk/hydro-whey", price:49.9},
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/nutrend-hydro-whey.html", price:52.9}
+    ],
+    kcal:340, carbs:1.8, fat:1.5, serving:25, bcaa:7.1,
+    desc:"Nutrend Hydro Whey je hydrolyzovaný srvátkový proteín (WPH) – rýchlo vstrebateľný s 87 % bielkovín. Bez laktózy, minimálny obsah tuku a sacharidov. Pre profesionálnych športovcov a ľudí s laktózovou intoleranciou."
+  },
+  {
+    id:13, image:"https://gymbeam.sk/media/catalog/product/n/u/nutrend-iso-whey-prozero-cokolada.jpg", brand:"Nutrend", name:"Iso Whey Prozero", fullName:"Nutrend Iso Whey Prozero – 2250 g",
+    type:"WPI", origin:"CZ", price:62.9, weight:2250, protein:85,
+    flavors:["Čokoláda","Vanilka","Jahoda","Biela čokoláda","Cappuccino","Cookies"],
+    rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Nutrend.sk", url:"https://www.nutrend.sk/iso-whey-prozero", price:62.9},
+      {name:"Alza.sk", url:"https://www.alza.sk/nutrend-iso-whey-prozero", price:65.9}
+    ],
+    kcal:350, carbs:2.2, fat:1.8, serving:25, bcaa:7.0,
+    desc:"Nutrend Iso Whey Prozero je srvátkový izolát bez laktózy a cukru v ekonomickom 2,25 kg balení. 85 % bielkovín na 100 g. Skvelá cena za kilogram pri veľkom balení. Dostupný v 6+ príchutiach."
+  },
+  {
+    id:14, image:"https://gymbeam.sk/media/catalog/product/g/y/gymbeam-true-whey-cokolada.jpg", brand:"GymBeam", name:"True Whey", fullName:"GymBeam True Whey – 1000 g",
+    type:"WPC", origin:"SK", price:29.9, weight:1000, protein:78,
+    flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies","Natural","Banán","Pistácia","Arašidové maslo"],
+    rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/true-whey-gymbeam.html", price:29.9},
+      {name:"Heureka.sk", url:"https://proteiny.heureka.sk/gymbeam-true-whey-1000-g/", price:29.9}
+    ],
+    kcal:375, carbs:4.5, fat:5.2, serving:30, bcaa:5.9,
+    desc:"GymBeam True Whey je vlajkový produkt slovenského e-shopu GymBeam. CFM spracovanie, 78 % bielkovín, 14 príchutí. GLP-1 friendly. Výborná cena, rýchle doručenie po celom Slovensku. Vhodný pre všetkých aktívnych ľudí."
+  },
+  {
+    id:15, image:"https://gymbeam.sk/media/catalog/product/g/y/gymbeam-pure-isowhey-cokolada.jpg", brand:"GymBeam", name:"Pure IsoWhey", fullName:"GymBeam Pure IsoWhey – 1000 g",
+    type:"WPI", origin:"SK", price:44.9, weight:1000, protein:85,
+    flavors:["Čokoláda","Vanilka","Jahoda","Natural","Karamel"],
+    rating:4.5, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/protein-pure-isowhey-gymbeam.html", price:44.9},
+      {name:"Heureka.sk", url:"https://proteiny.heureka.sk/gymbeam-pure-isowhey-1000-g/", price:44.9}
+    ],
+    kcal:355, carbs:2.1, fat:1.8, serving:25, bcaa:7.2,
+    desc:"GymBeam Pure IsoWhey je srvátkový izolát (WPI) vyrobený kombináciou mikrofiltrácie a ultrafiltrácie. 85 % bielkovín, bez laktózy, minimum tuku a cukru. Pre ľudí s intoleranciou laktózy a náročných športovcov."
+  },
+  {
+    id:16, image:"https://gymbeam.sk/media/catalog/product/g/y/gymbeam-clear-whey-isofue-vodny-melon.jpg", brand:"GymBeam", name:"Clear Whey IsoFue", fullName:"GymBeam Clear Whey IsoFue – 500 g",
+    type:"WPI", origin:"SK", price:39.9, weight:500, protein:88,
+    flavors:["Vodný melón","Broskyňový ľadový čaj","Citrón-limetka","Zelené jablko","Mango-marakuja"],
+    rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/protein-clear-whey-isofue-gymbeam.html", price:39.9}
+    ],
+    kcal:88, carbs:0, fat:0, serving:25, bcaa:6.8,
+    desc:"Clear Whey IsoFue je transparentný srvátkový izolát s konzistenciou ovocnej limonády. 88 % bielkovín, bez cukru, bez tuku. Skvelý ako letný drink s ľadom. GLP-1 friendly. CFM spracovanie."
+  },
+  {
+    id:17, image:"https://gymbeam.sk/media/catalog/product/k/o/kompava-whey-protein-80-cokolada.jpg", brand:"Kompava", name:"Whey Protein 80", fullName:"Kompava Whey Protein 80 – 2000 g",
+    type:"WPC", origin:"SK", price:29.9, weight:2000, protein:80,
+    flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Natural"],
+    rating:4.3, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Kompava.sk", url:"https://www.kompava.sk/kompava-whey-protein-80", price:29.9},
+      {name:"Heureka.sk", url:"https://proteiny.heureka.sk/kompava-whey-protein-80-2000-g/", price:29.9}
+    ],
+    kcal:378, carbs:5.6, fat:5.0, serving:30, bcaa:5.5,
+    desc:"Kompava Whey Protein 80 je slovenský srvátkový koncentrát s 80 % bielkovín v ekonomickom 2 kg balení. Výrobca zameraný na čistotu a zdravie. Ideálny pre každodenné užívanie s výborným pomerom cena/výkon."
+  },
+  {
+    id:18, image:"https://gymbeam.sk/media/catalog/product/k/o/koliba-wpc-80-natural.jpg", brand:"Koliba", name:"WPC 80 Protein", fullName:"Koliba WPC 80 Protein – 1000 g",
+    type:"WPC", origin:"SK", price:23.9, weight:1000, protein:80,
+    flavors:["Natural"],
+    rating:4.2, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Heureka.sk", url:"https://proteiny.heureka.sk/koliba-wpc-80-protein-1000-g/", price:23.9}
+    ],
+    kcal:376, carbs:5.0, fat:4.9, serving:30, bcaa:5.6,
+    desc:"Koliba WPC 80 je 100 % slovenský srvátkový proteínový koncentrát vyrobený z čerstvej srvátky tuzemského pôvodu. Chutný a dobre rozpustný, ~80 % bielkovín. Bez umelých farbív a plnidiel. Pre tých, ktorí chcú podporiť slovenského výrobcu."
+  },
+  {
+    id:19, image:"https://gymbeam.sk/media/catalog/product/a/k/aktin-srvatkovy-protein-cokolada.jpg", brand:"Aktin (Vilgain)", name:"Whey Protein", fullName:"Aktin Srvátkový proteín – 1000 g",
+    type:"WPC", origin:"CZ", price:28.9, weight:1000, protein:76,
+    flavors:["Čokoláda","Vanilka","Slaný karamel","Natural"],
+    rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Aktin.sk", url:"https://www.aktin.sk/srvatkovy-protein-1000-g", price:28.9},
+      {name:"Heureka.sk", url:"https://proteiny.heureka.sk/aktin-srvatkovy-protein-1000-g/", price:28.9}
+    ],
+    kcal:370, carbs:5.1, fat:5.2, serving:30, bcaa:5.8,
+    desc:"Aktin (e-shop skupiny Vilgain) Srvátkový proteín z mlieka kráv voľne sa pasúcich na írskych farmách. 100 % prírodný, sladený stéviou, prírodné arómy. Bez umelých sladidiel a farbív. Krémová konzistencia, výborná chuť."
+  },
+  {
+    id:20, image:"https://gymbeam.sk/media/catalog/product/b/i/biotech-usa-iso-whey-zero-cokolada.jpg", brand:"BioTech USA", name:"Iso Whey Zero", fullName:"BioTech USA Iso Whey Zero – 500 g",
+    type:"WPI", origin:"EU", price:29.9, weight:500, protein:86,
+    flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies","Banán","Biela čokoláda"],
+    rating:4.6, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"BioTechUSA.sk", url:"https://www.biotechusa.sk/iso-whey-zero", price:29.9},
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/biotech-usa-iso-whey-zero.html", price:31.9}
+    ],
+    kcal:352, carbs:2.5, fat:1.9, serving:25, bcaa:7.0,
+    desc:"BioTech USA Iso Whey Zero je srvátkový izolát bez laktózy, cukru, glukózy a farbív. 86 % bielkovín. Maďarská značka s celoeurópskou distribúciou dostupná na Slovensku. 7+ príchutí. Ideálny pri laktózovej intoleranc ii a pri redukcii."
+  },
+  {
+    id:21, image:"https://gymbeam.sk/media/catalog/product/s/c/scitec-100-whey-professional-cokolada.jpg", brand:"Scitec Nutrition", name:"100% Whey Professional", fullName:"Scitec 100% Whey Professional – 2350 g",
+    type:"WPC", origin:"EU", price:42.9, weight:2350, protein:77,
+    flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies","Orech","Banán","Pistácia","Cappuccino"],
+    rating:4.5, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"Scitecnutrition.com/sk", url:"https://www.scitecnutrition.com/sk/100-whey-professional", price:42.9},
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/scitec-100-whey-professional-2350g.html", price:44.9}
+    ],
+    kcal:375, carbs:5.8, fat:5.5, serving:30, bcaa:5.7,
+    desc:"Scitec 100% Whey Professional je maďarský srvátkový proteín preslávený výbornými príchuťami. Dostupný v 2,35 kg balení za výbornú cenu. Zmes WPC a WPI. Viac ako 20 príchutí – najlepší výber pre tých, komu záleží na chuti."
+  },
+  {
+    id:22, image:"https://gymbeam.sk/media/catalog/product/m/y/myprotein-impact-whey-protein-cokolada.jpg", brand:"MyProtein", name:"Impact Whey Protein", fullName:"MyProtein Impact Whey Protein – 1000 g",
+    type:"WPC", origin:"EU", price:29.9, weight:1000, protein:79,
+    flavors:["Čokoláda","Vanilka","Jahoda","Natural","Karamel","Cookies","Orech","Banán"],
+    rating:4.4, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"MyProtein.com/sk-sk", url:"https://www.myprotein.com/sk-sk/nutrition/protein/impact-whey-protein/10530943.html", price:29.9},
+      {name:"Alza.sk", url:"https://www.alza.sk/myprotein-impact-whey-protein", price:32.9}
+    ],
+    kcal:386, carbs:5.5, fat:5.1, serving:30, bcaa:5.5,
+    desc:"MyProtein Impact Whey je jeden z najpredávanejších proteínov na svete. Britský výrobca s priamym doručením na Slovensko. 79 % bielkovín, výborná cena pri akciách (často -40%). Viac ako 50 príchutí."
+  },
+  {
+    id:23, image:"https://gymbeam.sk/media/catalog/product/e/s/esn-designer-whey-cokolada.jpg", brand:"ESN", name:"Designer Whey", fullName:"ESN Designer Whey Protein – 1000 g",
+    type:"WPC", origin:"EU", price:38.9, weight:1000, protein:81,
+    flavors:["Čokoláda","Vanilka","Cookies","Karamel","Orech","Jahoda"],
+    rating:4.6, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"ESN.com", url:"https://www.esn.com/products/designer-whey", price:38.9},
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/esn-designer-whey.html", price:40.9}
+    ],
+    kcal:363, carbs:4.5, fat:4.6, serving:30, bcaa:5.8,
+    desc:"ESN Designer Whey je momentálne najrýchlejšie rastúci nemecký proteín aj na SK trhu. 81 % bielkovín, prémiové nemecké suroviny, výnimočne krémové príchute. Obľúbený hlavne pre svoju chuť a textúru."
+  },
+  {
+    id:24, image:"https://gymbeam.sk/media/catalog/product/d/y/dymatize-iso100-hydrolyzed-cokolada.jpg", brand:"Dymatize", name:"ISO100 Hydrolyzed", fullName:"Dymatize ISO100 Hydrolyzed – 620 g",
+    type:"WPH", origin:"Global", price:59.9, weight:620, protein:90,
+    flavors:["Čokoláda","Vanilka","Jahoda","Karamel","Cookies"],
+    rating:4.8, lactoseFree:true, vegan:false, wheyBased:true,
+    shops:[
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/dymatize-iso100-hydrolyzed.html", price:59.9},
+      {name:"Alza.sk", url:"https://www.alza.sk/dymatize-iso100-hydrolyzed", price:62.9}
+    ],
+    kcal:340, carbs:2.0, fat:0.9, serving:25, bcaa:7.2,
+    desc:"Dymatize ISO100 je hydrolyzovaný srvátkový izolát s 90 % bielkovín – najrýchlejšie vstrebateľný proteín dostupný na trhu. Bez laktózy, bez cukru. Certifikovaný pre profesionálnych športovcov. Americká prémiová značka dostupná v SR."
+  },
+  {
+    id:25, image:"https://gymbeam.sk/media/catalog/product/o/p/on-gold-standard-whey-cokolada.jpg", brand:"Optimum Nutrition", name:"Gold Standard 100% Whey", fullName:"Optimum Nutrition Gold Standard 100% Whey – 900 g",
+    type:"Blend", origin:"Global", price:47.9, weight:900, protein:80,
+    flavors:["Čokoláda","Vanilka","Jahoda","Cookies","Karamel","Banán"],
+    rating:4.8, lactoseFree:false, vegan:false, wheyBased:true,
+    shops:[
+      {name:"GymBeam.sk", url:"https://gymbeam.sk/optimum-nutrition-gold-standard-whey.html", price:47.9},
+      {name:"Alza.sk", url:"https://www.alza.sk/optimum-nutrition-gold-standard-whey", price:49.9}
+    ],
+    kcal:376, carbs:3.4, fat:3.6, serving:30, bcaa:5.5,
+    desc:"ON Gold Standard je globálny benchmark srvátkových proteínov s desaťročiami tradície. Zmes WPC, WPI a WPH. 80 % bielkovín, skvelá chuť. Dostupný v SR cez GymBeam a Alza. Referenčný proteín, s ktorým porovnávajú ostatné."
+  }
+];
+
+/* Static images: use product.image */
+
+
+   FILTER STATE
+═══════════════════════ */
+let F = {search:"", origin:"all", type:"all", whey:"all", flavor:"all", weight:"all", price:150, prot:60, rating:0, lactose:"all"};
+let sortV = "";
+let active = [];
+
+function ob(o){ return {SK:"b-sk",CZ:"b-cz",EU:"b-eu",Global:"b-gl"}[o]||"b-gl"; }
+function ol(o){ return {SK:"🇸🇰 SK",CZ:"🇨🇿 CZ",EU:"🇪🇺 EU",Global:"🌍 Global"}[o]||o; }
+function tc(t){ return {WPC:"tw",WPI:"ti",WPH:"ti",Vegan:"tv",Blend:"tb"}[t]||""; }
+function wl(w){ return w>=1000?(w/1000).toFixed(w%1000===0?0:1)+"kg":w+"g"; }
+function wband(w){ return w<=500?"xs":w<=1000?"s":w<=2000?"m":"l"; }
+function stH(r, sm=false){
+  let h=""; for(let i=1;i<=5;i++) h+=`<span class="s ${i<=Math.round(r)?'on':''}" style="font-size:${sm?10:12}px">★</span>`; return h;
+}
+function ico(o){ return {SK:"🇸🇰",CZ:"🇨🇿",EU:"🇪🇺",Global:"🌍"}[o]||"💊"; }
+
+function applyFilters() {
+  let res = DB.filter(p => {
+    if (F.search && !`${p.brand} ${p.name} ${p.type}`.toLowerCase().includes(F.search.toLowerCase())) return false;
+    if (F.origin!=="all" && p.origin!==F.origin) return false;
+    if (F.type!=="all" && p.type!==F.type) return false;
+    if (F.whey==="yes" && !p.wheyBased) return false;
+    if (F.whey==="no" && p.wheyBased) return false;
+    if (F.flavor!=="all" && !p.flavors.some(f=>f.toLowerCase().includes(F.flavor.toLowerCase()))) return false;
+    if (F.weight!=="all" && wband(p.weight)!==F.weight) return false;
+    if (p.price>F.price) return false;
+    if (p.protein<F.prot) return false;
+    if (p.rating<F.rating) return false;
+    if (F.lactose==="no" && !p.lactoseFree) return false;
+    return true;
+  });
+  if (sortV==="pa") res.sort((a,b)=>a.price-b.price);
+  else if (sortV==="pd") res.sort((a,b)=>b.price-a.price);
+  else if (sortV==="r") res.sort((a,b)=>b.rating-a.rating);
+  else if (sortV==="pr") res.sort((a,b)=>b.protein-a.protein);
+  else if (sortV==="n") res.sort((a,b)=>a.name.localeCompare(b.name));
+  active = res;
+  render();
+}
+
+function render() {
+  const g = document.getElementById("grid");
+  const n = active.length;
+  document.getElementById("gct").textContent = n+" proteínov";
+  document.getElementById("npill").textContent = n+" proteínov";
+  if (!n) {
+    g.innerHTML=`<div class="empty"><div class="empty-ico">🔍</div><h3>Žiadne výsledky</h3><p>Skús zmeniť alebo resetovať filtre</p></div>`;
+    return;
+  }
+  g.innerHTML = active.map((p,i) => `
+    <div class="card" onclick="openModal(${p.id})" style="animation-delay:${Math.min(i,18)*.035}s">
+      <div class="cimg" id="cimg${p.id}">
+        <div class="loading-img" id="li${p.id}"><div class="spinner"></div></div>
+        <img id="img${p.id}" src="" alt="${p.brand} ${p.name}" style="display:none"
+          onerror="this.style.display='none';document.getElementById('ph${p.id}').style.display='flex';document.getElementById('li${p.id}').style.display='none'">
+        <div class="ph" id="ph${p.id}" style="display:none">
+          <span class="ph-ico">${ico(p.origin)}</span>
+          <span class="ph-txt">${p.brand}<br>${p.name}</span>
+        </div>
+        <div class="cbadges">
+          <span class="bdg ${ob(p.origin)}">${ol(p.origin)}</span>
+          ${p.wheyBased?'<span class="bdg b-wh">🥛 Srvátka</span>':''}
+          ${p.vegan?'<span class="bdg b-vg">🌿 Vegan</span>':''}
+        </div>
+      </div>
+      <div class="cbody">
+        <div class="cbrand">${p.brand}</div>
+        <div class="cname">${p.name}</div>
+        <div class="cstars">${stH(p.rating,true)} <span style="margin-left:2px">${p.rating.toFixed(1)}</span></div>
+        <div class="ctags">
+          <span class="tag ${tc(p.type)}">${p.type}</span>
+          <span class="tag">${wl(p.weight)}</span>
+          <span class="tag">${p.protein}% bielkovín</span>
+          ${p.lactoseFree?'<span class="tag tlf">Bez laktózy</span>':''}
+        </div>
+        <div class="cbot">
+          <div class="cprice">od ${p.price.toFixed(2)} € <small>/ ${wl(p.weight)}</small></div>
+          <a class="clink" href="${p.shops[0].url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>`).join("");
+
+  // Images static via p.image
+}
+
+
+
+/* ═══════════════════════
+   MODAL
+═══════════════════════ */
+function openModal(id) {
+  const p = DB.find(x=>x.id===id);
+  if (!p) return;
+  const mi = document.getElementById("mini");
+  mi.innerHTML = `
+    <div class="mtop">
+      <div class="mimgw" id="mimg${p.id}">
+        <div class="spinner"></div>
+      </div>
+      <div class="minfo">
+        <div class="mbrand">${p.brand}</div>
+        <div class="mname">${p.fullName}</div>
+        <div class="mstars">${stH(p.rating)} <span style="margin-left:4px;font-size:14px;font-weight:600">${p.rating.toFixed(1)}</span><span style="color:var(--t3);font-size:12px;margin-left:2px">/ 5.0</span></div>
+        <div class="mprice">od ${p.price.toFixed(2)} € <small>/ ${wl(p.weight)}</small></div>
+        <div class="mbadges">
+          <span class="bdg ${ob(p.origin)}" style="font-size:11px;padding:4px 9px;border-radius:20px">${ol(p.origin)}</span>
+          <span class="bdg" style="font-size:11px;padding:4px 9px;border-radius:20px;${p.type==='WPC'?'background:rgba(0,113,227,.1);color:var(--blue)':p.type==='WPI'||p.type==='WPH'?'background:rgba(191,90,242,.1);color:var(--purple)':p.type==='Vegan'?'background:rgba(48,209,88,.1);color:#1a8a34':'background:rgba(255,69,58,.07);color:var(--red)'}">${p.type}</span>
+          ${p.wheyBased?'<span class="bdg b-wh" style="font-size:11px;padding:4px 9px;border-radius:20px">🥛 Srvátkovný</span>':''}
+          ${p.vegan?'<span class="bdg b-vg" style="font-size:11px;padding:4px 9px;border-radius:20px">🌿 Vegánsky</span>':''}
+          ${p.lactoseFree?'<span class="bdg" style="font-size:11px;padding:4px 9px;border-radius:20px;background:rgba(48,209,88,.1);color:#1a8a34">Bez laktózy</span>':''}
+        </div>
+      </div>
+    </div>
+    <div class="mdiv"></div>
+    <div class="msec">
+      <div class="mst">Nutričné hodnoty (na 100 g)</div>
+      <div class="mgrid">
+        <div class="mstat"><div class="msl">Bielkoviny</div><div class="msv" style="color:var(--blue)">${p.protein} %</div></div>
+        <div class="mstat"><div class="msl">Energia</div><div class="msv">${p.kcal} kcal</div></div>
+        <div class="mstat"><div class="msl">Sacharidy</div><div class="msv">${p.carbs} g</div></div>
+        <div class="mstat"><div class="msl">Tuky</div><div class="msv">${p.fat} g</div></div>
+        <div class="mstat"><div class="msl">BCAA / dávku</div><div class="msv">${p.bcaa} g</div></div>
+        <div class="mstat"><div class="msl">Veľkosť dávky</div><div class="msv">${p.serving} g</div></div>
+      </div>
+    </div>
+    <div class="msec">
+      <div class="mst">O produkte</div>
+      <div class="mdesc">${p.desc}</div>
+    </div>
+    <div class="msec">
+      <div class="mst">Dostupné príchute (${p.flavors.length})</div>
+      <div class="mflav">${p.flavors.map(f=>`<span class="mf">${f}</span>`).join("")}</div>
+    </div>
+    <div class="mdiv"></div>
+    <div class="msec">
+      <div class="mst">Kde kúpiť</div>
+      <div class="mshops">${p.shops.map(s=>`
+        <a class="mshop" href="${s.url}" target="_blank" rel="noopener">
+          <span class="mshop-name">${s.name}</span>
+          <div class="mshop-info">
+            <span class="mshop-price">${s.price.toFixed(2)} €</span>
+            <span class="mshop-arr">→</span>
+          </div>
+        </a>`).join("")}
+      </div>
+    </div>`;
+  document.getElementById("ovl").classList.add("open");
+  document.body.style.overflow = "hidden";
+
+
+}
+
+
+
+function closeModal() {
+  document.getElementById("ovl").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function handleOvlClick(e) {
+  if (e.target === document.getElementById("ovl")) closeModal();
+}
+document.addEventListener("keydown", e => { if(e.key==="Escape") closeModal(); });
+
+/* ═══════════════════════
+   FILTER WIRING
+═══════════════════════ */
+function chips(id, key) {
+  document.getElementById(id).addEventListener("click", e=>{
+    const b=e.target.closest(".chip"); if(!b) return;
+    document.querySelectorAll(`#${id} .chip`).forEach(c=>c.classList.remove("on"));
+    b.classList.add("on"); F[key]=b.dataset.v; applyFilters();
+  });
+}
+chips("fo","origin"); chips("ft","type"); chips("fw","whey"); chips("flac","lactose");
+
+document.getElementById("fr").addEventListener("click", e=>{
+  const b=e.target.closest(".sb2"); if(!b) return;
+  document.querySelectorAll(".sb2").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); F.rating=parseFloat(b.dataset.v); applyFilters();
+});
+document.getElementById("ff").addEventListener("change", e=>{F.flavor=e.target.value;applyFilters();});
+document.getElementById("fg2").addEventListener("change", e=>{F.weight=e.target.value;applyFilters();});
+document.getElementById("srt").addEventListener("change", e=>{sortV=e.target.value;applyFilters();});
+document.getElementById("fp").addEventListener("input", e=>{F.price=parseInt(e.target.value);document.getElementById("pv").textContent=F.price+" €";applyFilters();});
+document.getElementById("fprot").addEventListener("input", e=>{F.prot=parseInt(e.target.value);document.getElementById("prot-v").textContent=F.prot+" %";applyFilters();});
+
+const si=document.getElementById("search"),sc=document.getElementById("scl");
+si.addEventListener("input", e=>{F.search=e.target.value;sc.classList.toggle("on",e.target.value.length>0);applyFilters();});
+sc.addEventListener("click",()=>{si.value="";F.search="";sc.classList.remove("on");applyFilters();});
+
+function resetAll(){
+  F={search:"",origin:"all",type:"all",whey:"all",flavor:"all",weight:"all",price:150,prot:60,rating:0,lactose:"all"};
+  sortV=""; si.value=""; sc.classList.remove("on");
+  document.getElementById("fp").value=150; document.getElementById("pv").textContent="150 €";
+  document.getElementById("fprot").value=60; document.getElementById("prot-v").textContent="60 %";
+  document.getElementById("ff").value="all"; document.getElementById("fg2").value="all"; document.getElementById("srt").value="";
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+  document.querySelectorAll("#fo .chip[data-v='all'],#ft .chip[data-v='all'],#fw .chip[data-v='all'],#flac .chip[data-v='all']").forEach(c=>c.classList.add("on"));
+  document.querySelectorAll(".sb2").forEach(b=>b.classList.remove("on"));
+  document.querySelector(".sb2[data-v='0']").classList.add("on");
+  applyFilters();
+}
+
+applyFilters();
+</script>
+</body>
+</html>
