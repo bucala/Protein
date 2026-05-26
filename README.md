@@ -8,8 +8,8 @@ SK/CZ databáza proteínových doplnkov v jednom HTML súbore.
 - Statické obrázky bez externého AI fetchu.
 
 ## Spustenie
+
 Otvorte `protein-db.html` v prehliadači alebo nasadte cez GitHub Pages.
 
-## Zmeny
-- Obrázky sú teraz statické.
-- Odstránený Anthropic image fetch.
+## Licencia
+MIT
