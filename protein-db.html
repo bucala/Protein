@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProteinDB · SK/CZ</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f7; --surface:#fff; --s2:#f2f2f4; --border:rgba(0,0,0,.08);
+  --t1:#1d1d1f; --t2:#6e6e73; --t3:#aeaeb2;
+  --blue:#0071e3; --green:#30d158; --orange:#ff9f0a; --red:#ff453a; --purple:#bf5af2;
+  --r:18px; --rsm:10px;
+  --sh:0 2px 20px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.03);
+  --shlg:0 24px 80px rgba(0,0,0,.22),0 4px 20px rgba(0,0,0,.1);
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{height:52px;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:200}
+.logo{font-family:'DM Serif Display',serif;font-size:19px;letter-spacing:-.3px}
+.logo em{font-style:italic;color:var(--blue)}
+.npill{background:var(--s2);border-radius:20px;padding:3px 12px;font-size:12px;color:var(--t2);font-weight:500}
+
+/* HERO */
+.hero{max-width:1180px;margin:0 auto;padding:48px 28px 32px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(34px,5.5vw,54px);letter-spacing:-.8px;line-height:1.05;margin-bottom:10px}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:15px;color:var(--t2);font-weight:300;max-width:440px;line-height:1.6}
+.hero .note{font-size:12px;color:var(--t3);margin-top:8px;display:flex;align-items:center;gap:5px}
+
+/* SEARCH */
+.sw{max-width:1180px;margin:0 auto;padding:0 28px 26px}
+.sb{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;display:flex;align-items:center;gap:10px;padding:0 16px;box-shadow:var(--sh);transition:.2s var(--ease)}
+.sb:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,113,227,.1)}
+.sb svg{flex-shrink:0;color:var(--t3)}
+.sb input{flex:1;border:none;outline:none;font-size:16px;font-family:inherit;padding:13px 0;background:transparent;color:var(--t1)}
+.sb input::placeholder{color:var(--t3)}
+.scl{background:var(--bg);border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:11px;color:var(--t2)}
+.scl.on{display:flex}
+
+/* LAYOUT */
+.lay{max-width:1180px;margin:0 auto;padding:0 28px 80px;display:grid;grid-template-columns:236px 1fr;gap:22px;align-items:start}
+
+/* SIDEBAR */
+.sid{background:var(--surface);border-radius:var(--r);border:1px solid var(--border);padding:20px;box-shadow:var(--sh);position:sticky;top:66px;max-height:calc(100vh-78px);overflow-y:auto}
+.sid-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.sid-t{font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:var(--t2)}
+.rb{background:none;border:none;color:var(--blue);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit}
+
+.fg{margin-bottom:18px}.fg:last-child{margin-bottom:0}
+.fl{display:block;font-size:12px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{border:1.5px solid var(--border);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:500;color:var(--t2);background:var(--s2);cursor:pointer;transition:.15s;font-family:inherit}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+select.fs{width:100%;padding:8px 26px 8px 10px;border-radius:var(--rsm);border:1.5px solid var(--border);background:var(--s2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 9px center;appearance:none;font-size:12px;font-family:inherit;color:var(--t1);outline:none;cursor:pointer;transition:.15s}
+select.fs:focus{border-color:var(--blue)}
+.rl{display:flex;justify-content:space-between;font-size:11px;color:var(--t2);margin-top:5px}
+input[type=range]{width:100%;accent-color:var(--blue);cursor:pointer}
+.sr{display:flex;gap:4px}
+.sb2{border:1.5px solid var(--border);border-radius:8px;padding:4px 8px;font-size:11px;background:none;cursor:pointer;font-family:inherit;color:var(--t2);transition:.15s}
+.sb2.on,.sb2:hover{border-color:var(--orange);background:rgba(255,159,10,.08);color:var(--orange)}
+
+/* CONTENT */
+.gh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.gc{font-size:13px;color:var(--t2)}
+select.srt{padding:6px 24px 6px 10px;border-radius:var(-
