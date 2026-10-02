@@ -1,0 +1,175 @@
+[
+  {
+    "id": 1,
+    "product": "Vilgain Grass-Fed Whey Protein",
+    "page": "https://vilgain.sk/vilgain-grass-fed-whey-protein/vanilka-1-000-g-33420",
+    "url": "https://cdn.vilgain.com/image/product/box-model-desktop/3d68dc4a-304c-4a98-9b50-983f2cc774c4-3.png?v=1773239160",
+    "file": "assets/products/1.jpg"
+  },
+  {
+    "id": 2,
+    "product": "Vilgain Grass-Fed Whey Protein Isolate",
+    "page": "https://vilgain.sk/vilgain-grass-fed-whey-protein-isolate/vanilka-1-000-g-41892",
+    "url": "https://cdn.vilgain.com/image/product/box-model-desktop/1aca48a4-ad03-4d61-b82c-1bb7db22cc67-5.png?v=1773246155",
+    "file": "assets/products/2.jpg"
+  },
+  {
+    "id": 3,
+    "product": "Vilgain Lactose Free Whey Protein",
+    "page": "https://vilgain.sk/vilgain-lactose-free-whey-protein/slany-karamel-1-000-g-45434",
+    "url": "https://cdn.vilgain.com/image/product/detail-model-desktop/a1e0a66f-0279-4539-8cfc-f87f3c3bde11?v=1777977824",
+    "file": "assets/products/3.jpg"
+  },
+  {
+    "id": 4,
+    "product": "Vilgain Clear Whey Isolate",
+    "page": "https://vilgain.sk/vilgain-clear-whey-isolate/strawberry-lemonade-500-g-43863",
+    "url": "https://cdn.vilgain.com/image/product/box-model-desktop/763d01cb-a0af-4d04-ba83-5e66ef55db7e-3.png?v=1769494300",
+    "file": "assets/products/4.jpg"
+  },
+  {
+    "id": 5,
+    "product": "Voxberg Whey 100",
+    "page": "https://www.voxberg.com/en/products/whey-100/coconut-990g",
+    "url": "https://dxibnsil7hnfctmc.public.blob.vercel-storage.com/Whey%20100%20990g%20-%20Coconut.png",
+    "file": "assets/products/5.jpg"
+  },
+  {
+    "id": 6,
+    "product": "Voxberg Complex Protein",
+    "page": "https://www.voxberg.com/en/products/complex-protein/double-chocolate",
+    "url": "https://dxibnsil7hnfctmc.public.blob.vercel-storage.com/Complex_-_Double_Chocolate.png",
+    "file": "assets/products/6.jpg"
+  },
+  {
+    "id": 7,
+    "product": "Voxberg Women's Protein",
+    "page": "https://www.voxberg.com/en/products/womens-protein/white-chocolate-caramel-990g",
+    "url": "https://dxibnsil7hnfctmc.public.blob.vercel-storage.com/Women_s_Protein_990g_-_White_Chocolate___Caramel.png",
+    "file": "assets/products/7.jpg"
+  },
+  {
+    "id": 8,
+    "product": "Voxberg Vegan Protein",
+    "page": "https://www.voxberg.com/en/products/vegan-protein/chocolate-480g",
+    "url": "https://dxibnsil7hnfctmc.public.blob.vercel-storage.com/Vegan_-_Chocolate.png",
+    "file": "assets/products/8.jpg"
+  },
+  {
+    "id": 9,
+    "product": "Prom-in CFM Pure Performance",
+    "page": "https://www.bodyworld.eu/nl/en/prom-in-cfm-pure-performance-2250-g-6736",
+    "url": "https://www.bodyworld.eu/media/product/6736/764x400.jpg?nc=1774539896",
+    "file": "assets/products/9.jpg"
+  },
+  {
+    "id": 10,
+    "product": "Prom-in Wellness Whey",
+    "file": null,
+    "reason": "Presný produkt sa nepodarilo overiť. Fotografia iného proteínu nie je použitá."
+  },
+  {
+    "id": 11,
+    "product": "Nutrend 100% Whey Protein",
+    "page": "https://www.nutrend.eu/product/100-whey-protein-333/2250-g-chocolate-cocoa",
+    "url": "https://nutrendcdn.com/cdn-cgi/imagedelivery/v_g237akqysjqDvfyOsFkg/6dbd9979-fe63-4f67-10d5-8c29a5f9b900/width=928px,height=928px,fit=cover",
+    "file": "assets/products/11.jpg"
+  },
+  {
+    "id": 12,
+    "product": "Nutrend Hydro Whey",
+    "page": "https://www.nutrend.eu/product/hydro-whey-516/1600-g-chocolate",
+    "url": "https://nutrendcdn.com/cdn-cgi/imagedelivery/v_g237akqysjqDvfyOsFkg/fbf4d6fb-5da3-402a-7784-e97e5397a900/width=928px,height=928px,fit=cover",
+    "file": "assets/products/12.jpg"
+  },
+  {
+    "id": 13,
+    "product": "Nutrend Iso Whey Prozero",
+    "page": "https://www.nutrend.eu/product/iso-whey-prozero-616/2250-g-white-chocolate",
+    "url": "https://nutrendcdn.com/cdn-cgi/imagedelivery/v_g237akqysjqDvfyOsFkg/717a57de-820f-456d-1c54-2b153d7c8900/width=928px,height=928px,fit=cover",
+    "file": "assets/products/13.jpg"
+  },
+  {
+    "id": 14,
+    "product": "GymBeam True Whey",
+    "page": "https://gymbeam.sk/true-whey-gymbeam.html",
+    "url": "https://gymbeam.sk/media/catalog/product/cache/bf5a31e851f50f3ed6850cbbf183db11/p/r/protei_n_true_whey_-_gymbeam_1000_g_-_chocolate.png",
+    "file": "assets/products/14.webp"
+  },
+  {
+    "id": 15,
+    "product": "GymBeam Pure IsoWhey",
+    "page": "https://gymbeam.sk/pure-isowhey-gymbeam.html",
+    "url": "https://gymbeam.sk/media/catalog/product/cache/bf5a31e851f50f3ed6850cbbf183db11/p/u/pureisowhey-chocolate-2500g-mockup.jpg",
+    "file": "assets/products/15.webp"
+  },
+  {
+    "id": 16,
+    "product": "GymBeam Clear Whey IsoFue",
+    "page": "https://gymbeam.sk/protein-clear-whey-isofue-gymbeam.html",
+    "url": "https://gymbeam.sk/media/catalog/product/cache/bf5a31e851f50f3ed6850cbbf183db11/c/l/clearwheyisofue_mangomaracuja_mockup_1_.jpg",
+    "file": "assets/products/16.webp"
+  },
+  {
+    "id": 17,
+    "product": "Kompava Whey Protein 80",
+    "file": null,
+    "reason": "Výrobca uvádza Protein Fit 80, nie presný názov v databáze. Fotografia iného produktu nie je použitá."
+  },
+  {
+    "id": 18,
+    "product": "Koliba WPC80",
+    "page": "https://www.fitness4u.cz/koliba-wpc-80-1000g/",
+    "url": "https://cdn.fitness4u.cz/koliba-whey-protein-concentrate-1000-g-fkol001-696x696.webp",
+    "file": "assets/products/18.webp"
+  },
+  {
+    "id": 19,
+    "product": "Vilgain Whey Protein (Aktin)",
+    "page": "https://vilgain.sk/proteiny",
+    "url": "https://cdn.vilgain.com/image/product/box-model-desktop/eabc292a-c692-404d-a5d2-4a1065f064bb-3.png?v=1773244689",
+    "file": "assets/products/19.jpg"
+  },
+  {
+    "id": 20,
+    "product": "BioTech USA Iso Whey Zero",
+    "page": "https://shop.biotechusa.com/products/iso-whey-zero-1816-g",
+    "url": "https://shop.biotechusa.com/cdn/shop/files/IWZ_vanilla_600x600_1816g_grande.png?v=1764769382",
+    "file": "assets/products/20.jpg"
+  },
+  {
+    "id": 21,
+    "product": "Scitec 100% Whey Professional",
+    "page": "https://gymbeam.hu/100-whey-professional-feherje-scitec-nutrition.html",
+    "url": "https://gymbeam.hu/media/catalog/product/cache/70f742f66feec18cb83790f14444a3d1/p/r/proffesional_whey_cookies.png",
+    "file": "assets/products/21.jpg"
+  },
+  {
+    "id": 22,
+    "product": "MyProtein Impact Whey",
+    "page": "https://us.myprotein.com/p/sports-nutrition/impact-whey-protein/10852500/",
+    "url": "https://us.myprotein.com/images?url=https://static.thcdn.com/productimg/original/10852500-3455370969344355.png&width=774&height=774&fit=cover&format=webp&auto=avif",
+    "file": "assets/products/22.webp"
+  },
+  {
+    "id": 23,
+    "product": "ESN Designer Whey",
+    "page": "https://www.esn.com/en/products/esn-designer-whey-protein?variant=55758300938629",
+    "url": "https://www.esn.com/cdn/shop/files/DesignerWhey_908g_CinnamonCerealFlavor_2024x2024_shop-haukV1zz_b1865ed4-dafb-40dc-976c-2b3d8d3f9996.jpg?v=1789483134&width=256",
+    "file": "assets/products/23.jpg"
+  },
+  {
+    "id": 24,
+    "product": "Dymatize ISO100 Hydrolyzed",
+    "page": "https://gymbeam.sk/protein-iso-100-hydrolyzed-dymatize.html",
+    "url": "https://gymbeam.sk/media/catalog/product/cache/70f742f66feec18cb83790f14444a3d1/i/s/iso_100_hydrolyzed_-_900g_-_strawberry.png",
+    "file": "assets/products/24.jpg"
+  },
+  {
+    "id": 25,
+    "product": "Optimum Nutrition Gold Standard 100% Whey",
+    "page": "https://gymbeam.sk/100-whey-gold-standard-optimum-nutrition.html",
+    "url": "https://gymbeam.sk/media/catalog/product/cache/70f742f66feec18cb83790f14444a3d1/e/u/eu_on_gsw_5lb_tub_2kg_2ply_drc_6078372_angle01_1.png",
+    "file": "assets/products/25.jpg"
+  }
+]
